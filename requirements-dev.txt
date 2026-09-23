@@ -1,0 +1,4 @@
+# Local dbt Core tooling for offline validation (dbt parse / compile).
+# Keep versions aligned with the dbt Cloud "Latest" release channel.
+dbt-core==1.12.5
+dbt-snowflake==1.12.1

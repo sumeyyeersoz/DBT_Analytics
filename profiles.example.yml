@@ -1,0 +1,16 @@
+# Template for local dbt Core. Copy to profiles.yml (git-ignored) in the repo root.
+# Contains no credentials: every connection value is read from environment variables.
+# `dbt parse` does not connect to Snowflake, so the placeholder defaults are sufficient for it.
+default:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT', 'not_set') }}"
+      user: "{{ env_var('SNOWFLAKE_USER', 'not_set') }}"
+      password: "{{ env_var('SNOWFLAKE_PASSWORD', '') }}"
+      role: "{{ env_var('SNOWFLAKE_ROLE', 'not_set') }}"
+      warehouse: "{{ env_var('SNOWFLAKE_WAREHOUSE', 'COMPUTE_WH') }}"
+      database: "{{ env_var('SNOWFLAKE_DATABASE', 'DBT_PROJECT') }}"
+      schema: "{{ env_var('SNOWFLAKE_SCHEMA', 'ANALYTICS') }}"
+      threads: 4
