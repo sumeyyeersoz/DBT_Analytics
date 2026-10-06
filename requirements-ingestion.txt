@@ -1,0 +1,5 @@
+# Extract-load tooling: BigQuery public dataset -> local Parquet -> Snowflake RAW.
+google-cloud-bigquery==3.45.2
+pyarrow==25.0.1
+python-dotenv==1.2.3
+snowflake-connector-python==4.7.5

@@ -1,0 +1,400 @@
+version: 2
+models:
+- name: stg_thelook__distribution_centers
+  description: One row per distribution_center_id from the selected TheLook batch.
+    No joins or row deduplication; source nulls are preserved. Geography is retained
+    as source text.
+  data_tests:
+  - batch_row_count_matches:
+      arguments:
+        source_table: distribution_centers
+  columns:
+  - name: distribution_center_id
+    description: Source distribution_centers.id.
+    data_tests:
+    - not_null
+    - unique
+  - name: distribution_center_name
+    description: Source distribution_centers.name.
+  - name: latitude
+    description: Source distribution_centers.latitude.
+  - name: longitude
+    description: Source distribution_centers.longitude.
+  - name: distribution_center_geom
+    description: Source distribution_centers.distribution_center_geom.
+  - name: source_batch_id
+    description: Explicitly selected complete extract batch.
+    data_tests:
+    - not_null
+  - name: extracted_at
+    description: Batch extraction timestamp in UTC.
+    data_tests:
+    - not_null
+- name: stg_thelook__events
+  description: One row per event_id from the selected TheLook batch. No joins or row
+    deduplication; source nulls are preserved. Geography is retained as source text.
+  data_tests:
+  - batch_row_count_matches:
+      arguments:
+        source_table: events
+  columns:
+  - name: event_id
+    description: Source events.id.
+    data_tests:
+    - not_null
+    - unique
+  - name: customer_id
+    description: Source events.user_id.
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('stg_thelook__users')
+          field: customer_id
+  - name: sequence_number
+    description: Source events.sequence_number.
+  - name: session_id
+    description: Source events.session_id.
+  - name: created_at
+    description: Source events.created_at. UTC timestamp without session timezone
+      dependence.
+  - name: ip_address
+    description: Source events.ip_address.
+  - name: city
+    description: Source events.city.
+  - name: state
+    description: Source events.state.
+  - name: postal_code
+    description: Source events.postal_code.
+  - name: browser
+    description: Source events.browser.
+  - name: traffic_source
+    description: Source events.traffic_source.
+  - name: uri
+    description: Source events.uri.
+  - name: event_type
+    description: Source events.event_type.
+    data_tests:
+    - not_null
+    - accepted_values:
+        arguments:
+          values:
+          - product
+          - cart
+          - department
+          - purchase
+          - cancel
+          - home
+  - name: source_batch_id
+    description: Explicitly selected complete extract batch.
+    data_tests:
+    - not_null
+  - name: extracted_at
+    description: Batch extraction timestamp in UTC.
+    data_tests:
+    - not_null
+  - name: is_created_after_extract
+    description: Flags a source creation timestamp later than ingestion; rows are
+      preserved.
+- name: stg_thelook__inventory_items
+  description: One row per inventory_item_id from the selected TheLook batch. No joins
+    or row deduplication; source nulls are preserved. Geography is retained as source
+    text.
+  data_tests:
+  - batch_row_count_matches:
+      arguments:
+        source_table: inventory_items
+  columns:
+  - name: inventory_item_id
+    description: Source inventory_items.id.
+    data_tests:
+    - not_null
+    - unique
+  - name: product_id
+    description: Source inventory_items.product_id.
+    data_tests:
+    - not_null
+    - relationships:
+        arguments:
+          to: ref('stg_thelook__products')
+          field: product_id
+  - name: created_at
+    description: Source inventory_items.created_at. UTC timestamp without session
+      timezone dependence.
+  - name: sold_at
+    description: Source inventory_items.sold_at. UTC timestamp without session timezone
+      dependence.
+  - name: cost
+    description: Source inventory_items.cost.
+  - name: product_category
+    description: Source inventory_items.product_category.
+  - name: product_name
+    description: Source inventory_items.product_name.
+  - name: product_brand
+    description: Source inventory_items.product_brand.
+  - name: product_retail_price
+    description: Source inventory_items.product_retail_price.
+  - name: product_department
+    description: Source inventory_items.product_department.
+  - name: product_sku
+    description: Source inventory_items.product_sku.
+  - name: distribution_center_id
+    description: Source inventory_items.product_distribution_center_id.
+    data_tests:
+    - not_null
+    - relationships:
+        arguments:
+          to: ref('stg_thelook__distribution_centers')
+          field: distribution_center_id
+  - name: source_batch_id
+    description: Explicitly selected complete extract batch.
+    data_tests:
+    - not_null
+  - name: extracted_at
+    description: Batch extraction timestamp in UTC.
+    data_tests:
+    - not_null
+  - name: is_created_after_extract
+    description: Flags a source creation timestamp later than ingestion; rows are
+      preserved.
+- name: stg_thelook__order_items
+  description: One row per order_item_id from the selected TheLook batch. No joins
+    or row deduplication; source nulls are preserved. Geography is retained as source
+    text.
+  data_tests:
+  - batch_row_count_matches:
+      arguments:
+        source_table: order_items
+  columns:
+  - name: order_item_id
+    description: Source order_items.id.
+    data_tests:
+    - not_null
+    - unique
+  - name: order_id
+    description: Source order_items.order_id.
+    data_tests:
+    - not_null
+    - relationships:
+        arguments:
+          to: ref('stg_thelook__orders')
+          field: order_id
+  - name: customer_id
+    description: Source order_items.user_id.
+    data_tests:
+    - not_null
+    - relationships:
+        arguments:
+          to: ref('stg_thelook__users')
+          field: customer_id
+  - name: product_id
+    description: Source order_items.product_id.
+    data_tests:
+    - not_null
+    - relationships:
+        arguments:
+          to: ref('stg_thelook__products')
+          field: product_id
+  - name: inventory_item_id
+    description: Source order_items.inventory_item_id.
+    data_tests:
+    - not_null
+    - relationships:
+        arguments:
+          to: ref('stg_thelook__inventory_items')
+          field: inventory_item_id
+  - name: order_item_status
+    description: Source order_items.status.
+    data_tests:
+    - not_null
+    - accepted_values:
+        arguments:
+          values:
+          - shipped
+          - complete
+          - processing
+          - cancelled
+          - returned
+  - name: created_at
+    description: Source order_items.created_at. UTC timestamp without session timezone
+      dependence.
+  - name: shipped_at
+    description: Source order_items.shipped_at. UTC timestamp without session timezone
+      dependence.
+  - name: delivered_at
+    description: Source order_items.delivered_at. UTC timestamp without session timezone
+      dependence.
+  - name: returned_at
+    description: Source order_items.returned_at. UTC timestamp without session timezone
+      dependence.
+  - name: sale_price
+    description: Source order_items.sale_price.
+  - name: source_batch_id
+    description: Explicitly selected complete extract batch.
+    data_tests:
+    - not_null
+  - name: extracted_at
+    description: Batch extraction timestamp in UTC.
+    data_tests:
+    - not_null
+  - name: is_created_after_extract
+    description: Flags a source creation timestamp later than ingestion; rows are
+      preserved.
+- name: stg_thelook__orders
+  description: One row per order_id from the selected TheLook batch. No joins or row
+    deduplication; source nulls are preserved. Geography is retained as source text.
+  data_tests:
+  - batch_row_count_matches:
+      arguments:
+        source_table: orders
+  columns:
+  - name: order_id
+    description: Source orders.order_id.
+    data_tests:
+    - not_null
+    - unique
+  - name: customer_id
+    description: Source orders.user_id.
+    data_tests:
+    - not_null
+    - relationships:
+        arguments:
+          to: ref('stg_thelook__users')
+          field: customer_id
+  - name: order_status
+    description: Source orders.status.
+    data_tests:
+    - not_null
+    - accepted_values:
+        arguments:
+          values:
+          - shipped
+          - complete
+          - processing
+          - cancelled
+          - returned
+  - name: gender
+    description: Source orders.gender.
+  - name: created_at
+    description: Source orders.created_at. UTC timestamp without session timezone
+      dependence.
+  - name: returned_at
+    description: Source orders.returned_at. UTC timestamp without session timezone
+      dependence.
+  - name: shipped_at
+    description: Source orders.shipped_at. UTC timestamp without session timezone
+      dependence.
+  - name: delivered_at
+    description: Source orders.delivered_at. UTC timestamp without session timezone
+      dependence.
+  - name: order_item_count
+    description: Source orders.num_of_item.
+  - name: source_batch_id
+    description: Explicitly selected complete extract batch.
+    data_tests:
+    - not_null
+  - name: extracted_at
+    description: Batch extraction timestamp in UTC.
+    data_tests:
+    - not_null
+  - name: is_created_after_extract
+    description: Flags a source creation timestamp later than ingestion; rows are
+      preserved.
+- name: stg_thelook__products
+  description: One row per product_id from the selected TheLook batch. No joins or
+    row deduplication; source nulls are preserved. Geography is retained as source
+    text.
+  data_tests:
+  - batch_row_count_matches:
+      arguments:
+        source_table: products
+  columns:
+  - name: product_id
+    description: Source products.id.
+    data_tests:
+    - not_null
+    - unique
+  - name: cost
+    description: Source products.cost.
+  - name: category
+    description: Source products.category.
+  - name: product_name
+    description: Source products.name.
+  - name: brand
+    description: Source products.brand.
+  - name: retail_price
+    description: Source products.retail_price.
+  - name: department
+    description: Source products.department.
+  - name: sku
+    description: Source products.sku.
+  - name: distribution_center_id
+    description: Source products.distribution_center_id.
+    data_tests:
+    - not_null
+    - relationships:
+        arguments:
+          to: ref('stg_thelook__distribution_centers')
+          field: distribution_center_id
+  - name: source_batch_id
+    description: Explicitly selected complete extract batch.
+    data_tests:
+    - not_null
+  - name: extracted_at
+    description: Batch extraction timestamp in UTC.
+    data_tests:
+    - not_null
+- name: stg_thelook__users
+  description: One row per customer_id from the selected TheLook batch. No joins or
+    row deduplication; source nulls are preserved. Geography is retained as source
+    text.
+  data_tests:
+  - batch_row_count_matches:
+      arguments:
+        source_table: users
+  columns:
+  - name: customer_id
+    description: Source users.id.
+    data_tests:
+    - not_null
+    - unique
+  - name: first_name
+    description: Source users.first_name.
+  - name: last_name
+    description: Source users.last_name.
+  - name: email
+    description: Source users.email.
+  - name: age
+    description: Source users.age.
+  - name: gender
+    description: Source users.gender.
+  - name: state
+    description: Source users.state.
+  - name: street_address
+    description: Source users.street_address.
+  - name: postal_code
+    description: Source users.postal_code.
+  - name: city
+    description: Source users.city.
+  - name: country
+    description: Source users.country.
+  - name: latitude
+    description: Source users.latitude.
+  - name: longitude
+    description: Source users.longitude.
+  - name: traffic_source
+    description: Source users.traffic_source.
+  - name: created_at
+    description: Source users.created_at. UTC timestamp without session timezone dependence.
+  - name: user_geom
+    description: Source users.user_geom.
+  - name: source_batch_id
+    description: Explicitly selected complete extract batch.
+    data_tests:
+    - not_null
+  - name: extracted_at
+    description: Batch extraction timestamp in UTC.
+    data_tests:
+    - not_null
+  - name: is_created_after_extract
+    description: Flags a source creation timestamp later than ingestion; rows are
+      preserved.

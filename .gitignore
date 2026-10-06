@@ -1,5 +1,35 @@
-# you shouldn't commit these into source control
-# these are the default directory names, adjust/add to fit your needs
+# dbt generated artifacts
 target/
 dbt_packages/
 logs/
+.user.yml
+
+# Credentials and local configuration
+.env
+.env.*
+!.env.example
+.dbt/
+dbt_cloud.yml
+profiles.yml
+*.pem
+*.key
+*.p8
+*.p12
+*.pfx
+
+# Local IDE and operating system files
+.vscode/
+.idea/
+*.code-workspace
+.DS_Store
+Thumbs.db
+
+# Local runtimes and caches
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Downloaded datasets; small reviewed reference seeds belong in seeds/
+data/
+downloads/
