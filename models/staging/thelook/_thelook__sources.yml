@@ -1,0 +1,30 @@
+version: 2
+sources:
+- name: thelook
+  database: '{{ env_var(''SNOWFLAKE_DATABASE'', ''DBT_PROJECT'') }}'
+  schema: RAW
+  description: Append-only TheLook extracts. Source keys repeat across batches; staging
+    selects one verified complete batch.
+  tables:
+  - name: distribution_centers
+    identifier: DISTRIBUTION_CENTERS
+    description: Raw distribution_centers snapshots with _BATCH_ID and _EXTRACTED_AT
+      lineage.
+  - name: events
+    identifier: EVENTS
+    description: Raw events snapshots with _BATCH_ID and _EXTRACTED_AT lineage.
+  - name: inventory_items
+    identifier: INVENTORY_ITEMS
+    description: Raw inventory_items snapshots with _BATCH_ID and _EXTRACTED_AT lineage.
+  - name: order_items
+    identifier: ORDER_ITEMS
+    description: Raw order_items snapshots with _BATCH_ID and _EXTRACTED_AT lineage.
+  - name: orders
+    identifier: ORDERS
+    description: Raw orders snapshots with _BATCH_ID and _EXTRACTED_AT lineage.
+  - name: products
+    identifier: PRODUCTS
+    description: Raw products snapshots with _BATCH_ID and _EXTRACTED_AT lineage.
+  - name: users
+    identifier: USERS
+    description: Raw users snapshots with _BATCH_ID and _EXTRACTED_AT lineage.

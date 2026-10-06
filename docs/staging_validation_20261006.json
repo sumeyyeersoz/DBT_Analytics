@@ -1,0 +1,336 @@
+{
+  "batch_id": "20261005T161059Z",
+  "generated_at": "2026-10-06T09:38:36.640697Z",
+  "elapsed_seconds": 12.19273066520691,
+  "counts": {
+    "success": 7,
+    "pass": 58
+  },
+  "results": [
+    {
+      "unique_id": "model.my_new_project.stg_thelook__distribution_centers",
+      "status": "success",
+      "execution_time": 1.1027250289916992
+    },
+    {
+      "unique_id": "model.my_new_project.stg_thelook__events",
+      "status": "success",
+      "execution_time": 1.1062719821929932
+    },
+    {
+      "unique_id": "model.my_new_project.stg_thelook__inventory_items",
+      "status": "success",
+      "execution_time": 1.168562650680542
+    },
+    {
+      "unique_id": "model.my_new_project.stg_thelook__order_items",
+      "status": "success",
+      "execution_time": 1.181459903717041
+    },
+    {
+      "unique_id": "model.my_new_project.stg_thelook__products",
+      "status": "success",
+      "execution_time": 0.3727080821990967
+    },
+    {
+      "unique_id": "model.my_new_project.stg_thelook__orders",
+      "status": "success",
+      "execution_time": 0.39871811866760254
+    },
+    {
+      "unique_id": "test.my_new_project.batch_row_count_matches_stg_thelook__distribution_centers_distribution_centers.218b5c5e62",
+      "status": "pass",
+      "execution_time": 0.504319429397583
+    },
+    {
+      "unique_id": "test.my_new_project.not_null_stg_thelook__distribution_centers_extracted_at.85158c5863",
+      "status": "pass",
+      "execution_time": 0.22517800331115723
+    },
+    {
+      "unique_id": "model.my_new_project.stg_thelook__users",
+      "status": "success",
+      "execution_time": 0.6242866516113281
+    },
+    {
+      "unique_id": "test.my_new_project.unique_stg_thelook__distribution_centers_distribution_center_id.b3f89ad769",
+      "status": "pass",
+      "execution_time": 0.24291753768920898
+    },
+    {
+      "unique_id": "test.my_new_project.accepted_values_stg_thelook__events_event_type__product__cart__department__purchase__cancel__home.c69944948e",
+      "status": "pass",
+      "execution_time": 0.3498532772064209
+    },
+    {
+      "unique_id": "test.my_new_project.batch_row_count_matches_stg_thelook__events_events.a5269bbb25",
+      "status": "pass",
+      "execution_time": 0.29218077659606934
+    },
+    {
+      "unique_id": "test.my_new_project.not_null_stg_thelook__events_event_type.50d6dcbbef",
+      "status": "pass",
+      "execution_time": 0.24085021018981934
+    },
+    {
+      "unique_id": "test.my_new_project.not_null_stg_thelook__distribution_centers_source_batch_id.40bd3b7cf7",
+      "status": "pass",
+      "execution_time": 1.042602300643921
+    },
+    {
+      "unique_id": "test.my_new_project.not_null_stg_thelook__events_extracted_at.8cb5535ebf",
+      "status": "pass",
+      "execution_time": 0.2265794277191162
+    },
+    {
+      "unique_id": "test.my_new_project.not_null_stg_thelook__events_event_id.4c2a25b526",
+      "status": "pass",
+      "execution_time": 0.6977159976959229
+    },
+    {
+      "unique_id": "test.my_new_project.not_null_stg_thelook__distribution_centers_distribution_center_id.e48fa466a2",
+      "status": "pass",
+      "execution_time": 1.3258354663848877
+    },
+    {
+      "unique_id": "test.my_new_project.not_null_stg_thelook__events_source_batch_id.493c58b738",
+      "status": "pass",
+      "execution_time": 1.261206865310669
+    },
+    {
+      "unique_id": "test.my_new_project.batch_row_count_matches_stg_thelook__inventory_items_inventory_items.35db12a6ce",
+      "status": "pass",
+      "execution_time": 1.0701656341552734
+    },
+    {
+      "unique_id": "test.my_new_project.not_null_stg_thelook__inventory_items_distribution_center_id.2a32f692bc",
+      "status": "pass",
+      "execution_time": 0.7562098503112793
+    },
+    {
+      "unique_id": "test.my_new_project.unique_stg_thelook__events_event_id.68bf090849",
+      "status": "pass",
+      "execution_time": 1.098952293395996
+    },
+    {
+      "unique_id": "test.my_new_project.not_null_stg_thelook__inventory_items_extracted_at.b747f5629e",
+      "status": "pass",
+      "execution_time": 0.3312857151031494
+    },
+    {
+      "unique_id": "test.my_new_project.not_null_stg_thelook__inventory_items_source_batch_id.6dbf3fe239",
+      "status": "pass",
+      "execution_time": 0.1776106357574463
+    },
+    {
+      "unique_id": "test.my_new_project.not_null_stg_thelook__inventory_items_product_id.e79424540b",
+      "status": "pass",
+      "execution_time": 0.41225743293762207
+    },
+    {
+      "unique_id": "test.my_new_project.not_null_stg_thelook__inventory_items_inventory_item_id.f29953701d",
+      "status": "pass",
+      "execution_time": 0.43142151832580566
+    },
+    {
+      "unique_id": "test.my_new_project.batch_row_count_matches_stg_thelook__order_items_order_items.a3c718fb09",
+      "status": "pass",
+      "execution_time": 0.28384971618652344
+    },
+    {
+      "unique_id": "test.my_new_project.relationships_stg_thelook__inventory_items_distribution_center_id__distribution_center_id__ref_stg_thelook__distribution_centers_.bc9578b681",
+      "status": "pass",
+      "execution_time": 0.5908598899841309
+    },
+    {
+      "unique_id": "test.my_new_project.unique_stg_thelook__inventory_items_inventory_item_id.405fa60f60",
+      "status": "pass",
+      "execution_time": 0.5693109035491943
+    },
+    {
+      "unique_id": "test.my_new_project.accepted_values_stg_thelook__order_items_order_item_status__shipped__complete__processing__cancelled__returned.85715ff952",
+      "status": "pass",
+      "execution_time": 0.4791886806488037
+    },
+    {
+      "unique_id": "test.my_new_project.not_null_stg_thelook__order_items_extracted_at.28b09f42cd",
+      "status": "pass",
+      "execution_time": 0.23871564865112305
+    },
+    {
+      "unique_id": "test.my_new_project.not_null_stg_thelook__order_items_order_id.5ecbaf726c",
+      "status": "pass",
+      "execution_time": 0.18079543113708496
+    },
+    {
+      "unique_id": "test.my_new_project.not_null_stg_thelook__order_items_customer_id.a281e98713",
+      "status": "pass",
+      "execution_time": 0.48586559295654297
+    },
+    {
+      "unique_id": "test.my_new_project.not_null_stg_thelook__order_items_inventory_item_id.b23196d3f6",
+      "status": "pass",
+      "execution_time": 0.3958568572998047
+    },
+    {
+      "unique_id": "test.my_new_project.not_null_stg_thelook__order_items_order_item_id.f42d4c6740",
+      "status": "pass",
+      "execution_time": 0.2994110584259033
+    },
+    {
+      "unique_id": "test.my_new_project.not_null_stg_thelook__order_items_order_item_status.67149c203b",
+      "status": "pass",
+      "execution_time": 0.26674556732177734
+    },
+    {
+      "unique_id": "test.my_new_project.not_null_stg_thelook__order_items_product_id.07d4e4c424",
+      "status": "pass",
+      "execution_time": 0.312664270401001
+    },
+    {
+      "unique_id": "test.my_new_project.not_null_stg_thelook__order_items_source_batch_id.e6f8d661d1",
+      "status": "pass",
+      "execution_time": 0.3607015609741211
+    },
+    {
+      "unique_id": "test.my_new_project.unique_stg_thelook__order_items_order_item_id.e13357c234",
+      "status": "pass",
+      "execution_time": 0.20479393005371094
+    },
+    {
+      "unique_id": "test.my_new_project.relationships_stg_thelook__order_items_inventory_item_id__inventory_item_id__ref_stg_thelook__inventory_items_.e9c8708598",
+      "status": "pass",
+      "execution_time": 0.39174890518188477
+    },
+    {
+      "unique_id": "test.my_new_project.batch_row_count_matches_stg_thelook__products_products.0f9aea5cb3",
+      "status": "pass",
+      "execution_time": 0.2603569030761719
+    },
+    {
+      "unique_id": "test.my_new_project.not_null_stg_thelook__products_extracted_at.ccf8f79d1d",
+      "status": "pass",
+      "execution_time": 0.19179129600524902
+    },
+    {
+      "unique_id": "test.my_new_project.not_null_stg_thelook__products_distribution_center_id.ff8e0bffd9",
+      "status": "pass",
+      "execution_time": 0.37280845642089844
+    },
+    {
+      "unique_id": "test.my_new_project.not_null_stg_thelook__products_product_id.f8d6b036e8",
+      "status": "pass",
+      "execution_time": 0.24368691444396973
+    },
+    {
+      "unique_id": "test.my_new_project.not_null_stg_thelook__products_source_batch_id.1c3db9acdf",
+      "status": "pass",
+      "execution_time": 0.26326680183410645
+    },
+    {
+      "unique_id": "test.my_new_project.unique_stg_thelook__products_product_id.d597bcf74e",
+      "status": "pass",
+      "execution_time": 0.24995207786560059
+    },
+    {
+      "unique_id": "test.my_new_project.relationships_stg_thelook__products_distribution_center_id__distribution_center_id__ref_stg_thelook__distribution_centers_.1e53bd2ac7",
+      "status": "pass",
+      "execution_time": 0.33533501625061035
+    },
+    {
+      "unique_id": "test.my_new_project.relationships_stg_thelook__inventory_items_product_id__product_id__ref_stg_thelook__products_.e8e0422c90",
+      "status": "pass",
+      "execution_time": 0.5250694751739502
+    },
+    {
+      "unique_id": "test.my_new_project.relationships_stg_thelook__order_items_product_id__product_id__ref_stg_thelook__products_.2f62c5677c",
+      "status": "pass",
+      "execution_time": 0.42369961738586426
+    },
+    {
+      "unique_id": "test.my_new_project.not_null_stg_thelook__orders_customer_id.0ae836034d",
+      "status": "pass",
+      "execution_time": 0.32004427909851074
+    },
+    {
+      "unique_id": "test.my_new_project.batch_row_count_matches_stg_thelook__orders_orders.93c722e556",
+      "status": "pass",
+      "execution_time": 0.35011792182922363
+    },
+    {
+      "unique_id": "test.my_new_project.not_null_stg_thelook__orders_extracted_at.be9050589d",
+      "status": "pass",
+      "execution_time": 0.5948646068572998
+    },
+    {
+      "unique_id": "test.my_new_project.accepted_values_stg_thelook__orders_order_status__shipped__complete__processing__cancelled__returned.5735ccd03c",
+      "status": "pass",
+      "execution_time": 0.6832420825958252
+    },
+    {
+      "unique_id": "test.my_new_project.not_null_stg_thelook__orders_order_status.19cfac2afb",
+      "status": "pass",
+      "execution_time": 0.3513343334197998
+    },
+    {
+      "unique_id": "test.my_new_project.not_null_stg_thelook__orders_source_batch_id.0da5c77caa",
+      "status": "pass",
+      "execution_time": 0.27315759658813477
+    },
+    {
+      "unique_id": "test.my_new_project.not_null_stg_thelook__orders_order_id.04500cfb58",
+      "status": "pass",
+      "execution_time": 0.4420943260192871
+    },
+    {
+      "unique_id": "test.my_new_project.relationships_stg_thelook__order_items_order_id__order_id__ref_stg_thelook__orders_.664e8431f0",
+      "status": "pass",
+      "execution_time": 0.4121975898742676
+    },
+    {
+      "unique_id": "test.my_new_project.unique_stg_thelook__orders_order_id.67c7b8e81f",
+      "status": "pass",
+      "execution_time": 0.2200031280517578
+    },
+    {
+      "unique_id": "test.my_new_project.batch_row_count_matches_stg_thelook__users_users.8fe971b001",
+      "status": "pass",
+      "execution_time": 0.2615630626678467
+    },
+    {
+      "unique_id": "test.my_new_project.not_null_stg_thelook__users_extracted_at.9b6a633e74",
+      "status": "pass",
+      "execution_time": 0.17601609230041504
+    },
+    {
+      "unique_id": "test.my_new_project.not_null_stg_thelook__users_source_batch_id.56829d9abb",
+      "status": "pass",
+      "execution_time": 0.18837189674377441
+    },
+    {
+      "unique_id": "test.my_new_project.not_null_stg_thelook__users_customer_id.7fa3fb385f",
+      "status": "pass",
+      "execution_time": 0.3659820556640625
+    },
+    {
+      "unique_id": "test.my_new_project.unique_stg_thelook__users_customer_id.843bc79ad2",
+      "status": "pass",
+      "execution_time": 0.2573215961456299
+    },
+    {
+      "unique_id": "test.my_new_project.relationships_stg_thelook__order_items_customer_id__customer_id__ref_stg_thelook__users_.25a721c33d",
+      "status": "pass",
+      "execution_time": 0.3982703685760498
+    },
+    {
+      "unique_id": "test.my_new_project.relationships_stg_thelook__events_customer_id__customer_id__ref_stg_thelook__users_.f4908269c4",
+      "status": "pass",
+      "execution_time": 0.503363847732544
+    },
+    {
+      "unique_id": "test.my_new_project.relationships_stg_thelook__orders_customer_id__customer_id__ref_stg_thelook__users_.b19ce08b73",
+      "status": "pass",
+      "execution_time": 0.43967342376708984
+    }
+  ]
+}
