@@ -1,0 +1,162 @@
+version: 2
+models:
+- name: dim_customers
+  description: One row per source user in the selected batch, including users without
+    orders. Current snapshot only; not SCD2. Direct email and street address are omitted.
+  columns:
+  - name: customer_id
+    description: Source user key.
+    data_tests:
+    - not_null
+    - unique
+  - name: acquisition_channel
+    description: Source traffic_source at registration.
+  - name: registered_at
+    description: Registration timestamp in UTC.
+  - name: source_batch_id
+    description: Selected extract batch.
+    data_tests:
+    - not_null
+- name: dim_products
+  description: One row per source product in the selected batch. Names and brands
+    can be null. Current catalog cost is not used as historical sale cost.
+  columns:
+  - name: product_id
+    description: Source product key.
+    data_tests:
+    - not_null
+    - unique
+  - name: current_retail_price
+    description: Current catalog price, fixed precision with four decimal places.
+  - name: current_unit_cost
+    description: Current catalog cost; fact uses inventory unit cost.
+  - name: source_batch_id
+    description: Selected extract batch.
+    data_tests:
+    - not_null
+- name: fct_order_items
+  description: One row per source order item in the selected batch. Status-based portfolio
+    metrics, not accounting revenue. Monetary values use NUMBER(18,4); source provides
+    no currency column.
+  columns:
+  - name: order_item_id
+    description: One physical source order item.
+    data_tests:
+    - not_null
+    - unique
+  - name: order_id
+    description: Parent source order.
+    data_tests:
+    - not_null
+    - relationships:
+        arguments:
+          to: ref('stg_thelook__orders')
+          field: order_id
+  - name: customer_id
+    description: Buyer source user key.
+    data_tests:
+    - not_null
+    - relationships:
+        arguments:
+          to: ref('dim_customers')
+          field: customer_id
+  - name: product_id
+    description: Product source key.
+    data_tests:
+    - not_null
+    - relationships:
+        arguments:
+          to: ref('dim_products')
+          field: product_id
+  - name: inventory_item_id
+    description: Inventory unit used for cost.
+    data_tests:
+    - not_null
+    - relationships:
+        arguments:
+          to: ref('stg_thelook__inventory_items')
+          field: inventory_item_id
+  - name: order_date
+    description: UTC parent-order creation date; all items in an order share this
+      date.
+    data_tests:
+    - not_null
+  - name: order_item_status
+    description: Current item lifecycle status.
+    data_tests:
+    - not_null
+    - accepted_values:
+        arguments:
+          values:
+          - complete
+          - cancelled
+          - returned
+          - shipped
+          - processing
+  - name: item_quantity
+    description: One per source order item.
+    data_tests:
+    - not_null
+    - accepted_values:
+        arguments:
+          values:
+          - 1
+          quote: false
+  - name: item_amount
+    description: Source sale_price rounded to four decimals; includes all statuses,
+      not revenue.
+    data_tests:
+    - not_null
+  - name: unit_cost
+    description: Cost from the linked inventory item, rounded to four decimals.
+    data_tests:
+    - not_null
+  - name: completed_sales_amount
+    description: item_amount only for complete items; excludes shipped, processing,
+      cancelled and returned items.
+  - name: completed_gross_margin_amount
+    description: Completed sales less inventory cost; excludes taxes, shipping, marketing
+      and other costs. Not net profit.
+  - name: cancelled_item_amount
+    description: Listed sale amount of currently cancelled items; not a cash refund.
+  - name: returned_item_amount
+    description: Listed sale amount of currently returned items; not verified refund
+      cash.
+  - name: source_batch_id
+    description: Selected extract batch.
+    data_tests:
+    - not_null
+- name: mart_daily_sales
+  description: One row per UTC order creation date in the selected batch. Aggregates
+    current item statuses by order cohort date. Customer counts are not additive across
+    dates. Days without orders are absent.
+  columns:
+  - name: order_date
+    description: UTC order cohort date.
+    data_tests:
+    - not_null
+    - unique
+  - name: source_batch_id
+    description: Selected batch.
+    data_tests:
+    - not_null
+  - name: order_count
+    description: Distinct orders placed on this date.
+    data_tests:
+    - not_null
+  - name: customer_count
+    description: Distinct buyers on this date; not additive over time.
+    data_tests:
+    - not_null
+  - name: item_count
+    description: Total source order items across all statuses.
+    data_tests:
+    - not_null
+  - name: ordered_item_amount
+    description: Total item amounts across all statuses; not revenue.
+  - name: completed_sales_amount
+    description: Current complete-item amount attributed to original order date.
+  - name: completed_gross_margin_amount
+    description: Completed sales less linked inventory costs; not net profit.
+  - name: future_created_item_count
+    description: Items whose creation timestamp exceeds their extract timestamp.

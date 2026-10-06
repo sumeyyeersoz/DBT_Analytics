@@ -87,8 +87,8 @@ For syntax and project parsing, run `dbt parse` in dbt Cloud or locally as shown
 
 TheLook extract/load code and Snowflake RAW setup SQL are implemented in `ingestion/`. On 2026-10-05, a Windows smoke test extracted and loaded all 10 distribution_centers rows in batch 20261005T090850Z. Snowflake contained 10 rows and 10 distinct IDs for that batch before and after repeating the load; the repeat skipped the already loaded file. The full seven-table batch 20261005T161059Z was extracted on 2026-10-05 and loaded and profiled on 2026-10-06. All Parquet/RAW counts matched, candidate keys were non-null and unique within the batch, all nine checked relationships had no non-null orphans, and both order consistency checks passed. See [the batch profile](thelook_profile_20261005T161059Z.md) for nullable fields, future timestamps, and modeling limitations. Reproduce the aggregate checks with `.venv/Scripts/python.exe ingestion/profile_batch.py --batch-id 20261005T161059Z`. Configure Google credentials and the ignored `.env` before running ingestion; store the Snowflake private key outside the repository. Use a Windows path such as `C:/Users/your-user/.keys/snowflake.p8` for `SNOWFLAKE_PRIVATE_KEY_PATH`.
 
-Dimensional models, incremental processing, and SCD2 are not implemented yet. Profile the source data before deciding model grains and whether incremental processing or snapshots are justified.
+Sales dimensions and marts are implemented and validated; see sales_models.md. Incremental processing and SCD2 remain deferred until source change behavior is established.
 
 ## Staging milestone
 
-On 2026-10-06, seven staging views and 58 data tests passed in Snowflake via local dbt Core. See [staging design and validation](staging.md). Business marts remain to be implemented.
+On 2026-10-06, seven staging views and 58 data tests passed in Snowflake via local dbt Core. See [staging design and validation](staging.md). Sales marts were subsequently implemented and validated; see [sales models](sales_models.md).

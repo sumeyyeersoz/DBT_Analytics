@@ -28,5 +28,10 @@ models:
       +schema: staging
       +tags:
       - staging
+    marts:
+      +materialized: table
+      +schema: marts
+      +tags:
+      - sales
 vars:
   thelook_batch_id: 20261005T161059Z
